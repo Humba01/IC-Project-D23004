@@ -1,18 +1,45 @@
-import os, sys, time
+from curses import echo
+import datetime
+import time
 
 umidade = 0
 temperatura = 0
 qualidade = 0
 parametros = []
 
-# def ler_umidade():
+tempo = time.gmtime();
 
-# def ler_temperatura():
+datetime.time(tempo);
 
-# def determina_qualidade():
+parar_leitura = True or False;
 
-# def verifica_parametros():
+def ler_umidade(coleta_manual_dados: bool):
+  if coleta_manual_dados:
+    umidade = input("Digite a umidade encontrada: ");
+  else:
+    umidade = 0; 
+  return umidade;
 
-# def grava_dados():
+def ler_temperatura(coleta_manual_dados: bool):
+  if coleta_manual_dados:
+    temperatura = input("Digite a temperatura encontrada: ");
+  else:
+    temperatura = 0;
+  return temperatura;
 
-# def gera_interface():
+def determina_qualidade(coleta_manual_dados: bool):
+  if coleta_manual_dados:
+    qualidade = input("Digite a qualidade do alimento encontrada (Suposição):");
+  else:
+    qualidade = 0;
+  return qualidade;
+
+def verifica_parametros():
+  parametros = [umidade, temperatura, qualidade];
+  echo(parametros);
+
+ler_umidade(True);
+ler_temperatura(True);
+determina_qualidade(True);
+verifica_parametros();
+
