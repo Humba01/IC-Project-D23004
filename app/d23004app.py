@@ -1,6 +1,7 @@
 from curses import echo
 import datetime
 import time
+import sqlite3
 
 umidade = 0
 temperatura = 0
@@ -42,4 +43,10 @@ ler_umidade(True);
 ler_temperatura(True);
 determina_qualidade(True);
 verifica_parametros();
+
+# K Informa a versão do SQLite 
+sqlite3.sqlite_version_info();
+
+sqlite3.connect('d23004.db');
+
 
