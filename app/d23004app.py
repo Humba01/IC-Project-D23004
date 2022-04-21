@@ -1,4 +1,4 @@
-from curses import echo
+import os
 import datetime
 import time
 import sqlite3
@@ -9,8 +9,6 @@ qualidade = 0
 parametros = []
 
 tempo = time.gmtime();
-
-datetime.time(tempo);
 
 parar_leitura = True or False;
 
@@ -37,16 +35,53 @@ def determina_qualidade(coleta_manual_dados: bool):
 
 def verifica_parametros():
   parametros = [umidade, temperatura, qualidade];
-  echo(parametros);
+  print(parametros);
 
 ler_umidade(True);
 ler_temperatura(True);
 determina_qualidade(True);
 verifica_parametros();
 
-# K Informa a versão do SQLite 
-sqlite3.sqlite_version_info();
+# Informa a versão do SQLite 
+print(sqlite3.version);
 
-sqlite3.connect('d23004.db');
+# Cria a conexão com o banco de dados
+conn = sqlite3.connect('d23004.db');
 
+# gera um cursor para manipulação do banco de dados
+cursor = conn.cursor();
+
+# Cria a tabela
+cursor.execute("""
+  CREATE TABLE IF NOT EXISTS dados (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    data_hora DATETIME,
+    umidade INTEGER,
+    temperatura INTEGER,
+    qualidade INTEGER
+  )
+""");
+
+# Insere os dados na tabela
+cursor.execute("""
+  INSERT INTO dados (data_hora, umidade, temperatura, qualidade)
+  VALUES (?, ?, ?, ?)
+""", (datetime.datetime.now(), umidade, temperatura, qualidade));
+
+# Salva as alterações
+conn.commit();
+
+# Fecha a conexão
+conn.close();
+
+# Cria uma cópia do banco de dados
+os.system("cp d23004.db db/d23004_backup.db");
+
+# Gera um arquivo de log
+log = open("log.txt", "a");
+log.write("\n" + str(datetime.datetime.now()) + " - Backup realizado com sucesso!");
+log.close();
+
+# Fecha o programa
+exit()
 
