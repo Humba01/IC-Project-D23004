@@ -3,6 +3,7 @@ import datetime
 import time
 import sqlite3
 
+# Declarando variáveis
 umidade = 0
 temperatura = 0
 qualidade = 0
@@ -12,6 +13,7 @@ tempo = time.gmtime();
 
 parar_leitura = True or False;
 
+# Funções para coletar dados
 def ler_umidade(coleta_manual_dados: bool):
   if coleta_manual_dados:
     umidade = input("Digite a umidade encontrada: ");
@@ -37,6 +39,7 @@ def verifica_parametros():
   parametros = [umidade, temperatura, qualidade];
   print(parametros);
 
+# Invocação das Funções
 ler_umidade(True);
 ler_temperatura(True);
 determina_qualidade(True);
