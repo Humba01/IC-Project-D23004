@@ -18,26 +18,28 @@ parar_leitura = True or False;
 def ler_umidade(coleta_manual_dados: bool):
   if coleta_manual_dados:
     umidade = input("Digite a umidade encontrada: ");
-  else:
+    parametros.append(umidade);
+  elif coleta_manual_dados == False:
     umidade = 0; 
   return umidade;
 
 def ler_temperatura(coleta_manual_dados: bool):
   if coleta_manual_dados:
     temperatura = input("Digite a temperatura encontrada: ");
-  else:
+    parametros.append(temperatura);
+  elif coleta_manual_dados == False:
     temperatura = 0;
   return temperatura;
 
 def determina_qualidade(coleta_manual_dados: bool):
   if coleta_manual_dados:
     qualidade = input("Digite a qualidade do alimento encontrada (Suposição):");
-  else:
+    parametros.append(qualidade);
+  elif coleta_manual_dados == False:
     qualidade = 0;
   return qualidade;
 
 def verifica_parametros():
-  parametros = [umidade, temperatura, qualidade];
   print(parametros);
 
 # Invocação das Funções
@@ -47,7 +49,7 @@ determina_qualidade(True);
 verifica_parametros();
 
 # Informa a versão do SQLite 
-print(sqlite3.version);
+print("\n\nSQL Version:" + sqlite3.version + "\n\n");
 
 # Cria a conexão com o banco de dados
 conn = sqlite3.connect('d23004.db');
@@ -79,7 +81,7 @@ conn.commit();
 conn.close();
 
 # Cria uma cópia do banco de dados
-os.system("cp d23004.db db/d23004_backup.db");
+os.system("cp d23004.db d23004_" + str(tempo.tm_year) + "_" + str(tempo.tm_mon) + "_" + str(tempo.tm_mday) + "_" + str(tempo.tm_hour) + "_" + str(tempo.tm_min) + "_" + str(tempo.tm_sec) + ".db");
 
 # Gera um arquivo de log
 log = open("log.txt", "a");
