@@ -81,7 +81,8 @@ conn.commit();
 conn.close();
 
 # Cria uma cópia do banco de dados
-os.system("cp d23004.db d23004_" + str(tempo.tm_year) + "_" + str(tempo.tm_mon) + "_" + str(tempo.tm_mday) + "_" + str(tempo.tm_hour) + "_" + str(tempo.tm_min) + "_" + str(tempo.tm_sec) + ".db");
+  #! Recurso desativado temporariamente 
+# os.system("cp d23004.db d23004_" + str(tempo.tm_year) + "_" + str(tempo.tm_mon) + "_" + str(tempo.tm_mday) + "_" + str(tempo.tm_hour) + "_" + str(tempo.tm_min) + "_" + str(tempo.tm_sec) + ".db");
 
 # Gera um arquivo de log
 log = open("log.txt", "a");
