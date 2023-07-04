@@ -1,6 +1,6 @@
 <div align="center">
   
-# IC-ProjectD23004
+# IC-Project-D23004
 
 ### Projeto de Introdução a Computação - 2022/1
 
